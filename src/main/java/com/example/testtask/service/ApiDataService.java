@@ -1,6 +1,6 @@
 package com.example.testtask.service;
 
-import com.example.testtask.dto.ApiDataRequest;
+import com.example.testtask.dto.ApiDataRequestDTO;
 import com.example.testtask.entity.ApiDataEntity;
 import com.example.testtask.repository.ApiDataRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class ApiDataService {
     }
 
     @Transactional
-    public ApiDataEntity create(ApiDataRequest request) {
+    public ApiDataEntity create(ApiDataRequestDTO request) {
         ApiDataEntity entity = ApiDataEntity.builder()
                 .createdAt(Instant.now())
                 .success(request.success())
@@ -42,7 +42,7 @@ public class ApiDataService {
     }
 
     @Transactional
-    public Optional<ApiDataEntity> update(UUID id, ApiDataRequest request) {
+    public Optional<ApiDataEntity> update(UUID id, ApiDataRequestDTO request) {
         return repository.findById(id).map(existing -> {
             existing.setSuccess(request.success());
             existing.setPayload(request.payload());
